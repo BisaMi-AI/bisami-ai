@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# uv
+.uv/
+
+# Variables d'environnement — NE JAMAIS COMMITTER
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Base de données locale
+*.db
+*.sqlite3
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Linting / formatage
+.ruff_cache/
+.mypy_cache/
+
+# Node.js
+node_modules/
+.next/
+.nuxt/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Uploads / fichiers temporaires
+uploads/
+tmp/

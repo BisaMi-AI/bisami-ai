@@ -1,0 +1,46 @@
+services:
+  db:
+    image: pgvector/pgvector:pg18
+    container_name: bisami-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: db_bisami_dev
+      POSTGRES_USER: bisami
+      POSTGRES_PASSWORD: bisami
+
+    ports:
+      - "5435:5432"
+
+    volumes:
+      - bisami_postgres_data:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bisami -d db_bisami_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+
+    container_name: bisami-api
+    restart: unless-stopped
+
+    ports:
+      - "8001:8000"
+
+    env_file:
+      - ./apps/api/.env
+
+    environment:
+      DATABASE_URL: postgresql+psycopg://bisami:bisami@db:5432/db_bisami_dev
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  bisami_postgres_data:
